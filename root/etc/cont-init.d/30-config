@@ -2,27 +2,29 @@
 
 # permissions
 chown -R abc:abc \
-	/app \
-	/archive \
-	/config \
+        /app \
+        /archive \
+        /config \
         /opt
 
 if [[ ! -d /config/var ]]
 then
-  mv /opt/digitalwatchdog/mediaserver/var /config/var
-  rm -rf /opt/digitalwatchdog/mediaserver/var
-  ln -s /config/var /opt/digitalwatchdog/mediaserver/var
-else
-  rm -rf /opt/digitalwatchdog/mediaserver/var
-  ln -s /config/var /opt/digitalwatchdog/mediaserver/var
+  mv /opt/${COMPANY_NAME}/mediaserver/var /config/var
+fi
+
+if [[ ! -h /opt/${COMPANY_NAME}/mediaserver/var ]]
+then
+  rm -rf /opt/${COMPANY_NAME}/mediaserver/var
+  ln -s /config/var /opt/${COMPANY_NAME}/mediaserver/var
 fi
 
 if [[ ! -d /config/etc ]]
 then
-  mv /opt/digitalwatchdog/mediaserver/etc /config/etc
-  rm -rf /opt/digitalwatchdog/mediaserver/etc
-  ln -s /config/etc /opt/digitalwatchdog/mediaserver/etc
-else
-  rm -rf /opt/digitalwatchdog/mediaserver/etc
-  ln -s /config/etc /opt/digitalwatchdog/mediaserver/etc
+  mv /opt/${COMPANY_NAME}/mediaserver/etc /config/etc
+fi
+
+if [[ ! -h /opt/${COMPANY_NAME}/mediaserver/etc ]]
+then
+  rm -rf /opt/${COMPANY_NAME}/mediaserver/etc
+  ln -s /config/etc /opt/${COMPANY_NAME}/mediaserver/etc
 fi

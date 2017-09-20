@@ -2,4 +2,4 @@
 
 exec \
         s6-setuidgid abc /bin/bash -c \
-        '/opt/digitalwatchdog/mediaserver/bin/mediaserver'
+        '/opt/${COMPANY_NAME}/mediaserver/bin/mediaserver'

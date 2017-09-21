@@ -13,3 +13,17 @@ Based on the amazing work by [LinuxServer.io][linuxserverurl], TheHomeRepot aims
 [Digital Watchdog Spectrum IPVMS][appurl] is a free to view [VMS](https://en.wikipedia.org/wiki/Video_management_system) that adds recording capability with the purchase of camera licenses.
 
 [![Digital Watchdog Spectrum IPVMS](https://github.com/thehomerepot/media/raw/master/dwspectrum-icon.png)][appurl]
+
+## Usage
+
+```
+docker run -d \
+--name=dwspectrum \
+--restart=unless-stopped \
+--net=host \
+-e PUID=<UID> -e PGID=<GID> \
+-e TZ=<timezone> \
+-v </path/to/config>:/config \
+-v </path/to/recordings>:"/archive/DW Spectrum Media" \
+thehomerepot/dwspectrum
+```

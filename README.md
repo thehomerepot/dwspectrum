@@ -7,7 +7,7 @@
 
 Based on the amazing work by [LinuxServer.io][linuxserverurl], TheHomeRepot aims to provide additional quality, reliable containers. 
 
-# thehomerepot/qbittorrent
+# thehomerepot/dwspectrum
 
 [Digital Watchdog Spectrum IPVMS][appurl] is a free to view [VMS](https://en.wikipedia.org/wiki/Video_management_system) that adds recording capability with the purchase of camera licenses.
 
@@ -61,7 +61,7 @@ You will need to install and run the [DWSpectrum client](http://digital-watchdog
 
 In order to record from your security cameras, you will need to purchase licenses. These are purchased PER actively recording camera and can be moved between cameras.
 
-**However, the licenses are tied to a uniqely generated HUID (hardware ID) and cannot easily be moved. This may change in v3.1.X but currently you must log a support request to have licenses moved to a new server. For this reason be mindful of where you install licenses. I would not currently do so inside a docker container**
+**However, the licenses are tied to a uniqely generated HWID (hardware ID) and cannot easily be moved. This may change in v3.1.X but currently you must log a support request to have licenses moved to a new server. For this reason be mindful of where you install licenses. I would not currently do so inside a docker container**
 
 ## Info
 

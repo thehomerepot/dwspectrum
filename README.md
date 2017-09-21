@@ -8,7 +8,6 @@
 Based on the amazing work by [LinuxServer.io][linuxserverurl], TheHomeRepot aims to provide additional quality, reliable containers. 
 
 # thehomerepot/qbittorrent
-[![](https://images.microbadger.com/badges/version/linuxserver/qbittorrent.svg)](https://microbadger.com/images/linuxserver/qbittorrent "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/qbittorrent.svg)](https://microbadger.com/images/linuxserver/qbittorrent "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/qbittorrent.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/qbittorrent.svg)][hub][![Build Status](https://ci.linuxserver.io/buildStatus/icon?job=Docker-Builders/x86-64/x86-64-qbittorrent)](https://ci.linuxserver.io/job/Docker-Builders/job/x86-64/job/x86-64-qbittorrent/)
 
 [Digital Watchdog Spectrum IPVMS][appurl] is a free to view [VMS](https://en.wikipedia.org/wiki/Video_management_system) that adds recording capability with the purchase of camera licenses.
 
@@ -43,8 +42,6 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e PUID=` for for UserID - see below for explanation
 * `-e TZ` - for timezone information *eg Europe/London, etc*
 
-It is based on ubuntu xenial with s6 overlay, for shell access whilst the container is running do `docker exec -it dwspectrum /bin/bash`.
-
 ### User / Group Identifiers
 
 Sometimes when using data volumes (`-v` flags) permissions issues can arise between the host OS and the container. We avoid this issue by allowing you to specify the user `PUID` and group `PGID`. Ensure the data volume directory on the host is owned by the same user you specify. DO NOT USE ROOT
@@ -62,7 +59,9 @@ You will need to install and run the [DWSpectrum client](http://digital-watchdog
 
 ## Licensing
 
-In order to record from your security cameras, you will need to purchase licenses. These are purchased PER actively recording camera and can be moved between cameras. **However, the licenses are tied to a uniqely generated HUID (hardware ID) and cannot easily be moved. This may change in v3.1.X but currently you must log a support request to have licenses moved to a new server. For this reason be mindful of where you install licenses. I would not currently do so inside a docker conatiner**
+In order to record from your security cameras, you will need to purchase licenses. These are purchased PER actively recording camera and can be moved between cameras.
+
+**However, the licenses are tied to a uniqely generated HUID (hardware ID) and cannot easily be moved. This may change in v3.1.X but currently you must log a support request to have licenses moved to a new server. For this reason be mindful of where you install licenses. I would not currently do so inside a docker container**
 
 ## Info
 

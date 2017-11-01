@@ -3,7 +3,7 @@ MAINTAINER Ryan Flagler
 
 # global environment settings
 ENV DEBIAN_FRONTEND="noninteractive" \
-ENV COMPANY_NAME="digitalwatchdog" \
+COMPANY_NAME="digitalwatchdog" \
 SOFTWARE_URL="http://digital-watchdog.com/DW_Spectrum/software/dwspectrum-server-3.0.0.15297-linux64.zip"
 
 # install packages

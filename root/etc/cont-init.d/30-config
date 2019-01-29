@@ -17,6 +17,12 @@ then
     mv /opt/${COMPANY_NAME}/mediaserver/var /config/var
   fi
   ln -s /config/var /opt/${COMPANY_NAME}/mediaserver/var
+else
+  if [[ ! -d /config/var ]]
+  then
+    mkdir /config/var
+    chown -R abc:abc /config/var
+  fi
 fi
 
 if [[ ! -h /opt/${COMPANY_NAME}/mediaserver/etc ]]
@@ -29,4 +35,10 @@ then
     mv /opt/${COMPANY_NAME}/mediaserver/etc /config/etc
   fi
   ln -s /config/etc /opt/${COMPANY_NAME}/mediaserver/etc
+else
+  if [[ ! -d /config/opt ]]
+  then
+    mkdir /config/opt
+    chown -R abc:abc /config/opt
+  fi
 fi

@@ -7,24 +7,26 @@ chown -R abc:abc \
         /config \
         /opt
 
-if [[ ! -d /config/var ]]
-then
-  mv /opt/${COMPANY_NAME}/mediaserver/var /config/var
-fi
-
 if [[ ! -h /opt/${COMPANY_NAME}/mediaserver/var ]]
 then
-  rm -rf /opt/${COMPANY_NAME}/mediaserver/var
+  if [[ -d /config/var ]]
+  then
+    rm -rf /opt/${COMPANY_NAME}/mediaserver/var
+  elif [[ ! -d /config/var ]]
+  then
+    mv /opt/${COMPANY_NAME}/mediaserver/var /config/var
+  fi
   ln -s /config/var /opt/${COMPANY_NAME}/mediaserver/var
-fi
-
-if [[ ! -d /config/etc ]]
-then
-  mv /opt/${COMPANY_NAME}/mediaserver/etc /config/etc
 fi
 
 if [[ ! -h /opt/${COMPANY_NAME}/mediaserver/etc ]]
 then
-  rm -rf /opt/${COMPANY_NAME}/mediaserver/etc
+  if [[ -d /config/etc ]]
+  then
+    rm -rf /opt/${COMPANY_NAME}/mediaserver/etc
+  elif [[ ! -d /config/etc ]]
+  then
+    mv /opt/${COMPANY_NAME}/mediaserver/etc /config/etc
+  fi
   ln -s /config/etc /opt/${COMPANY_NAME}/mediaserver/etc
 fi

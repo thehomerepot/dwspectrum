@@ -47,13 +47,17 @@ if [[ -n ${LISTEN_PORT} ]]
 then
   if [[ -f /config/etc/mediaserver.conf ]]
   then
+    echo "mediaserver.conf exists"
     if [[ $(grep -Ec '^port=' /config/etc/mediaserver.conf) -gt 0 ]]
     then
-      sed -i "s/^port=.*/port=${LISTEN_PORT}//" /config/etc/mediaserver.conf
+      echo "port value exists, updating"
+      sed -i "s/^port=.*/port=${LISTEN_PORT}/" /config/etc/mediaserver.conf
     else
+      echo "port value doesn't exist, adding"
       echo "port=${LISTEN_PORT}" >> /config/etc/mediaserver.conf
     fi
   else
+    echo "mediaserver.conf doesn't exist, creating"
     #echo "[General]" >> /config/etc/mediaserver.conf
     echo "port=${LISTEN_PORT}" >> /config/etc/mediaserver.conf
   fi

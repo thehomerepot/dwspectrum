@@ -36,9 +36,9 @@ then
   fi
   ln -s /config/etc /opt/${COMPANY_NAME}/mediaserver/etc
 else
-  if [[ ! -d /config/opt ]]
+  if [[ ! -d /config/etc ]]
   then
-    mkdir /config/opt
-    chown -R abc:abc /config/opt
+    mkdir /config/etc
+    chown -R abc:abc /config/etc
   fi
 fi

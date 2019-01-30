@@ -42,3 +42,19 @@ else
     chown -R abc:abc /config/etc
   fi
 fi
+
+if [[ -n ${LISTEN_PORT} ]]
+then
+  if [[ -f /config/etc/mediaserver.conf ]]
+  then
+    if [[ $(grep -Ec '^port=' /config/etc/mediaserver.conf) -gt 0 ]]
+    then
+      sed -i "s/^port=.*/port=${LISTEN_PORT}//" /config/etc/mediaserver.conf
+    else
+      echo "port=${LISTEN_PORT}" >> /config/etc/mediaserver.conf
+    fi
+  else
+    #echo "[General]" >> /config/etc/mediaserver.conf
+    echo "port=${LISTEN_PORT}" >> /config/etc/mediaserver.conf
+  fi
+fi

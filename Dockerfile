@@ -4,7 +4,7 @@ MAINTAINER Ryan Flagler
 # global environment settings
 ENV DEBIAN_FRONTEND="noninteractive" \
 COMPANY_NAME="digitalwatchdog" \
-SOFTWARE_URL="http://updates.networkoptix.com/digitalwatchdog/28749/linux/dwspectrum-server-3.2.0.28749-linux64.deb"
+SOFTWARE_URL="https://updates.networkoptix.com/digitalwatchdog/28749/linux/dwspectrum-server-3.2.0.28749-linux64.deb"
 
 # install packages
 RUN \

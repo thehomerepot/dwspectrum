@@ -23,7 +23,7 @@ docker run -d \
 -e PUID=<UID> -e PGID=<GID> \
 -e TZ=<timezone> \
 -v </path/to/config>:/config \
--v </path/to/recordings>:"/archive/DW Spectrum Media" \
+-v </path/to/recordings>:/archive \
 thehomerepot/dwspectrum
 ```
 
@@ -37,7 +37,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 
 * `--net=host` - Shares host networking with container, **required prior to version 3.1.x**.
 * `-v /config` - Configuration files
-* `-v /archive/DW Spectrum Media` - Recordings will be landed here. **you must leave the "DW Spectrum Media" subfolder**
+* `-v /archive` - Recordings will be landed here.
 * `-e PGID=` for for GroupID - see below for explanation
 * `-e PUID=` for for UserID - see below for explanation
 * `-e TZ` - for timezone information *eg Europe/London, etc*
@@ -71,4 +71,5 @@ In order to record from your security cameras, you will need to purchase license
 
 ## Versions
 
++ **2019.11.09:** Updated for v4 changes
 + **2017.09.21:** Initial creation

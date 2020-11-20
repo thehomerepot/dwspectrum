@@ -54,7 +54,7 @@ RUN \
 # install dwspectrum
  mkdir -p /opt/deb && \
  cd /opt/deb && \
- curl -O -L \
+ curl -k -O -L \
 	"${SOFTWARE_URL}" && \
  dpkg-deb -R $(ls *.deb) extracted && \
  rm -rf ./extracted/etc/init.d && \

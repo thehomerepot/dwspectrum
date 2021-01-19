@@ -1,79 +1,36 @@
-FROM lsiobase/xenial
+FROM lsiobase/ubuntu:bionic
 MAINTAINER Ryan Flagler
 
 # global environment settings
-ENV DEBIAN_FRONTEND="noninteractive" \
-COMPANY_NAME="digitalwatchdog" \
-SOFTWARE_URL="https://digital-watchdog.com/_gendownloads/25b9c1f7-c1c6-4a32-8a93-66ec71640f83/dwspectrum-server-4.1.0.31401-linux64.deb"
+ENV DEBIAN_FRONTEND="noninteractive"
+ENV COMPANY_NAME="digitalwatchdog"
+ENV SOFTWARE_URL="https://updates.networkoptix.com/digitalwatchdog/32045/linux/dwspectrum-server-4.1.0.32045-linux64-patch.deb"
+
+# pull installer
+RUN     mkdir -p /opt/deb && \
+        curl -o /opt/deb/${COMPANY_NAME}.deb -L "${SOFTWARE_URL}"
+        
+# modify user
+RUN     usermod -l $COMPANY_NAME abc && \
+        groupmod -n $COMPANY_NAME abc && \
+        sed -i "s/abc/\$COMPANY_NAME/g" /etc/cont-init.d/10-adduser
 
 # install packages
-RUN \
- apt-get update && \
- apt-get install -y \
-        python \
-        upstart-job \
-        psmisc \
-        upstart \
-        libsm6 \
-        libice6 \
-        libaudio2 \
-        libogg0 \
-        libxfixes3 \
-        libxrender1 \
-        unzip \
-        fontconfig-config \
-        fonts-dejavu-core \
-        libdrm-amdgpu1 \
-        libdrm-intel1 \
-        libdrm-nouveau2 \
-        libdrm-radeon1 \
-        libfontconfig1 \
-        libgl1-mesa-dri \
-        libgl1-mesa-glx \
-        libglapi-mesa \
-        libllvm4.0 \
-        libpciaccess0 \
-        libsensors4 \
-        libtxc-dxtn-s2tc0 \
-        libx11-xcb1 \
-        libxcb-dri2-0 \
-        libxcb-dri3-0 \
-        libxcb-glx0 \
-        libxcb-present0 \
-        libxcb-sync1 \
-        libxdamage1 \
-        libxshmfence1 \
-        libxxf86vm1 \
-        mtools \
-        syslinux \
-        net-tools \
-        libglib2.0 \
-        cifs-utils \
-        syslinux-common && \
-
-# install dwspectrum
- mkdir -p /opt/deb && \
- cd /opt/deb && \
- curl -k -O -L \
-	"${SOFTWARE_URL}" && \
- dpkg-deb -R $(ls *.deb) extracted && \
- rm -rf ./extracted/etc/init.d && \
- sed -i '/service apport stop/q' ./extracted/DEBIAN/postinst && \
- dpkg-deb -b extracted ${COMPANY_NAME}.deb && \
- echo ${COMPANY_NAME} ${COMPANY_NAME}-mediaserver/accepted-mediaserver-eula boolean true | debconf-set-selections && \
- dpkg -i ${COMPANY_NAME}.deb && \
-
-# cleanup
- apt-get clean && \
- rm -rf \
-	/opt/deb \
-        /tmp/* \
-        /var/lib/apt/lists/* \
-        /var/tmp/*
+RUN     apt-get update && \
+        apt-get install --no-install-recommends --yes \
+                gdb \
+                /opt/deb/${COMPANY_NAME}.deb && \
+        apt-get clean && \
+        apt-get autoremove --purge && \
+        rm -rf \
+                /opt/deb \
+                /tmp/* \
+                /var/lib/apt/lists/* \
+                /var/tmp/*
 
 # add local files
 COPY root/ /
-		
+
 # ports and volumes
 EXPOSE 7001
 VOLUME /config /archive
